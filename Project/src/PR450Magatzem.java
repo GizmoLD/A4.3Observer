@@ -3,7 +3,7 @@ import java.beans.PropertyChangeSupport;
 import java.util.ArrayList;
 import java.util.Iterator;
 
-public class PR450Magatzem {
+public class PR450Magatzem{
     private PropertyChangeSupport llistaObservers = new PropertyChangeSupport(this);
     private ArrayList<PR450Producte> magatzem = new ArrayList<>();
     private int capacitad = 10;
@@ -48,11 +48,17 @@ public class PR450Magatzem {
         while (iterator.hasNext()) {
             PR450Producte p = iterator.next();
             if (p.getId() == id) {
+                PR450Producte oldProducte = p;
                 iterator.remove();
                 this.setCapacitad(this.capacitad+1);
-                llistaObservers.firePropertyChange("magatzemRemove", id, getCapacitad());
-
+                llistaObservers.firePropertyChange("magatzemRemove", oldProducte, getCapacitad());
             }
         }
+    }
+
+    @Override
+    public String toString() {
+        return
+            "Productes al magatzem: " + getMagatzem();
     }
 }

@@ -1,8 +1,7 @@
 import java.beans.PropertyChangeListener;
 import java.beans.PropertyChangeSupport;
-import java.util.ArrayList;
 
-public class PR450Producte{ //extends Observable<ArrayList>
+public class PR450Producte{
     private PropertyChangeSupport llistaObservers = new PropertyChangeSupport(this);
 
     private int id;
@@ -39,5 +38,11 @@ public class PR450Producte{ //extends Observable<ArrayList>
         String oldName = this.nom;
         this.nom = newName;
         llistaObservers.firePropertyChange("producteName", oldName, newName);
+    }
+
+    @Override
+    public String toString() {
+        return  
+            " "+ getId() + ": " + getNom();
     }
 }
