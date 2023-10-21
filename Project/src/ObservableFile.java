@@ -10,7 +10,7 @@ import java.nio.file.WatchService;
 import java.util.concurrent.CompletableFuture;
 
 public abstract class ObservableFile {
-    
+
     String path;
     String name;
     CompletableFuture<Void> future = null;
@@ -18,7 +18,7 @@ public abstract class ObservableFile {
     public ObservableFile (File file) {
         this.path = (Paths.get(file.getAbsolutePath())).getParent().toString();
         this.name = file.getName();
-        
+
         if (this.path.charAt(this.path.length() - 1) == '.') {
             this.path = this.path.substring(0, this.path.length() - 1);
         }
@@ -40,9 +40,9 @@ public abstract class ObservableFile {
                         StandardWatchEventKinds.ENTRY_CREATE, 
                         StandardWatchEventKinds.ENTRY_DELETE, 
                         StandardWatchEventKinds.ENTRY_MODIFY);
-                     
+
                     System.out.printf("Thread vigilant l'arxiu \"%s\" del path \"%s\"\n", obj.name, dir);
-                     
+
                     while (running) {
                         WatchKey key;
                         try {
@@ -50,26 +50,26 @@ public abstract class ObservableFile {
                         } catch (InterruptedException ex) {
                             return;
                         }
-                         
+
                         for (WatchEvent<?> event : key.pollEvents()) {
                             WatchEvent.Kind<?> kind = event.kind();
-                             
+                            
                             @SuppressWarnings("unchecked")
                             WatchEvent<Path> ev = (WatchEvent<Path>) event;
                             Path fileName = ev.context();
 
                             if (kind == StandardWatchEventKinds.ENTRY_MODIFY
-                             && fileName.toString().equals(obj.name)) {
+                                && fileName.toString().equals(obj.name)) {
                                 obj.onChange();
                             }
                         }
-                         
+
                         boolean valid = key.reset();
                         if (!valid) {
                             break;
                         }
                     }
-                     
+                    
                 } catch (IOException ex) {
                     System.err.println(ex);
                 }

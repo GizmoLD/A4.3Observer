@@ -11,8 +11,7 @@ import java.beans.PropertyChangeListener;
  */
 
 public class CotxeMain {
-
-    public static void main (String[] args) {
+    public static void main(String[] args) {
 
         CotxeEvents cotxe = new CotxeEvents();
 
@@ -20,7 +19,7 @@ public class CotxeMain {
             @Override
             public void propertyChange(PropertyChangeEvent evt) {
                 System.out.printf("L'estat s'ha canviat de %s cap a %s a través de la propietat '%s'\n",
-                                  evt.getOldValue(), evt.getNewValue(), evt.getPropertyName());                
+                        evt.getOldValue(), evt.getNewValue(), evt.getPropertyName());
             }
         };
         cotxe.addPropertyChangeListener("estat", l0);
@@ -29,7 +28,7 @@ public class CotxeMain {
             @Override
             public void propertyChange(PropertyChangeEvent evt) {
                 System.out.printf("La gasolina s'ha canviat de %s cap a %s a través de la propietat '%s'\n",
-                                  evt.getOldValue(), evt.getNewValue(), evt.getPropertyName());                
+                        evt.getOldValue(), evt.getNewValue(), evt.getPropertyName());
             }
         };
         cotxe.addPropertyChangeListener("gasolina", l1);
@@ -37,17 +36,22 @@ public class CotxeMain {
         PropertyChangeListener l2 = new PropertyChangeListener() {
             @Override
             public void propertyChange(PropertyChangeEvent evt) {
-                System.out.printf("Gasolina segon event\n");                
+                System.out.printf("Gasolina segon event\n");
             }
         };
         cotxe.addPropertyChangeListener("gasolina", l2);
 
+        System.out.println("1");
         cotxe.setEstat(CotxeEstats.ENDAVANT);
+        System.out.println("2");
         cotxe.setEstat(CotxeEstats.EDARRERA);
-
+        System.out.println("3");
         // Les següents accions ja no les pot fer perquè no té gasolina
         cotxe.setEstat(CotxeEstats.GIRDRETA);
+        System.out.println("4");
         cotxe.setEstat(CotxeEstats.EDARRERA);
+        System.out.println("5");
         cotxe.setEstat(CotxeEstats.ATURAT);
+        System.out.println("6");
     }
 }
