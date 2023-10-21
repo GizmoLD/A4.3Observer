@@ -25,7 +25,6 @@ public class Main {
         PR450Producte p2 = new PR450Producte(2, "Rotulador");
         PR450Producte p3 = new PR450Producte(3, "Carpeta");
         PR450Producte p4 = new PR450Producte(4, "Motxilla");
-        System.out.println("WE NEED TO\n\nLEARN JAVA\n\nAS QUICKLY AS POSSIBLE");
 
         PR450Magatzem magatzem = new PR450Magatzem();
         PR450Entregues entregues = new PR450Entregues();    
